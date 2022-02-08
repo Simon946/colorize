@@ -11,6 +11,7 @@ void coloredPrint(std::string input, int color, int contrast){
         
         if(input.at(i) == '(' || input.at(i) == '[' || input.at(i) == '{'){
             color+=contrast;
+            if(color == 0)color = 1;
             colorBegin += std::to_string(color);
             colorBegin += "m";
             input.insert((i), colorBegin);
@@ -26,6 +27,7 @@ void coloredPrint(std::string input, int color, int contrast){
                 input.insert(i + 1, colorEnd);
                 std::string newColorBegin = "\033[38;5;";
                 color -= contrast;
+                if(color <= 0)color = -1;
                 newColorBegin += std::to_string(color);
                 newColorBegin += "m";
                 input.insert(i + 1 + colorEnd.length(), newColorBegin);
